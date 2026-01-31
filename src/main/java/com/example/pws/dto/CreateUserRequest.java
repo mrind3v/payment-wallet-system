@@ -2,12 +2,17 @@ package com.example.pws.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 public class CreateUserRequest {
 
     @NotNull
     private String name ;
     @NotNull
     private String email ;
+
+    @NotNull
+    private BigDecimal balance ;
 
 
     public String getName() {
@@ -24,5 +29,13 @@ public class CreateUserRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }

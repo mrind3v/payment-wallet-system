@@ -1,23 +1,17 @@
 package com.example.pws.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UpdateEmailRequest {
 
-    private String status;
-    private String message;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    @NotNull
+    private String email;
 
     public String getMessage() {
-        return message;
+        return email;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.email = message ;
     }
 }
