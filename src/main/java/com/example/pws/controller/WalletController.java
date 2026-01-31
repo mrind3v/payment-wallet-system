@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-import java.math.BigDecimal;
-
 @RestController
-@RequestMapping("/api/{id}/wallet" )
+@RequestMapping("/api/{id}/wallet")
 public class WalletController {
 
     private final WalletService walletService;
@@ -20,17 +18,16 @@ public class WalletController {
     }
 
     @GetMapping("/{walletId}")
-    public ResponseEntity<Wallet > getWalletById(@PathVariable String walletId) {
+    public ResponseEntity<Wallet> getWalletById(@PathVariable String walletId) {
         Wallet response = walletService.getWalletById(walletId);
-        return ResponseEntity.ok(response) ;
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/balance" )
-    public GetBalanceResponse getBalanceById(@PathVariable String id )
-    {
-        GetBalanceResponse rs= new GetBalanceResponse() ;
-        BigDecimal balance= walletService.getBalanceById(id ) ;
-        rs.setBalance(balance ) ;
-        return rs ;
+    @GetMapping("/balance")
+    public GetBalanceResponse getBalanceById(@PathVariable String id) {
+        GetBalanceResponse rs = new GetBalanceResponse();
+        BigDecimal balance = walletService.getBalanceById(id);
+        rs.setBalance(balance);
+        return rs;
     }
 }
