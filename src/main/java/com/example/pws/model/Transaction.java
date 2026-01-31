@@ -16,13 +16,9 @@ public class Transaction {
     private String id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
     private String sender_id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
     private String receiver_id;
 
     @NotNull

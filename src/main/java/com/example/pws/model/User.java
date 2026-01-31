@@ -32,10 +32,7 @@ public class User {
         this.createdAt = new Date();
     }
 
-    @OneToOne
-    @JoinColumn(name = "wallet_id")
     @NotNull
-
     private String wallet_id;
 
 
