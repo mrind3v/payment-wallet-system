@@ -32,5 +32,5 @@ public class Transaction {
         this.createdAt = new Date();
     }
 
-    // getters & setters
+
 }

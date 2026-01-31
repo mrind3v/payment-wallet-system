@@ -1,10 +1,13 @@
 package com.example.pws.controller;
+import com.example.pws.model.Wallet;
+import com.example.pws.service.WalletService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/api/wallet")
+@RequestMapping("/api/users/{id}/wallets")
 public class WalletController {
 
     private final WalletService walletService;
@@ -13,10 +16,16 @@ public class WalletController {
         this.walletService = walletService;
     }
 
-    @GetMapping("/{walletId}")
-    public ResponseEntity<WalletResponse> getWalletById(@PathVariable Long walletId) {
-        WalletResponse response = walletService.getWalletById(walletId);
-        return ResponseEntity.ok(response);
+
+    @GetMapping
+    public ResponseEntity<Wallet> getWalletById(@PathVariable String id) {
+        Wallet wallet = walletService.getWalletById(id);
+        return ResponseEntity.ok(wallet);
     }
 
+    @GetMapping("/balance")
+    public ResponseEntity<BigDecimal>  getWalletBalance(@PathVariable String id ) {
+        Wallet wallet = walletService.getWalletById(id);
+        return ResponseEntity.ok(wallet.getBalance());
+    }
 }
