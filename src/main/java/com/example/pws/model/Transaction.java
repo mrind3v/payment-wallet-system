@@ -12,21 +12,21 @@ import java.util.Date;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull
-    private String userA ;
+    private String userA;
 
     @NotNull
-    private String userB ;
+    private String userB;
 
     @NotNull
-    @DecimalMin("0.0" )
+    @DecimalMin("0.0")
     private BigDecimal amount;
 
     @NotNull
-    private String type ;
+    private String type;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -36,7 +36,6 @@ public class Transaction {
     }
 
     // getters & setters
-
 
     public String getId() {
         return id;
@@ -67,7 +66,7 @@ public class Transaction {
     }
 
     public void setType(String type) {
-        this.type = type ;
+        this.type = type;
     }
 
     public String getUserA() {
@@ -83,6 +82,6 @@ public class Transaction {
     }
 
     public void setUserB(String userB) {
-        this.userB = userB ;
+        this.userB = userB;
     }
 }

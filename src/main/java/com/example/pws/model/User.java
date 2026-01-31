@@ -12,7 +12,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @NotNull
@@ -25,7 +25,7 @@ public class User {
     private String status;
 
     @NotNull
-    private String password ;
+    private String password;
 
     @NotNull
     @Column(name = "created_at")
@@ -79,11 +79,11 @@ public class User {
     }
 
     public String getWalletId() {
-        return walletId ;
+        return walletId;
     }
 
     public void setWalletId(String wallet_id) {
-        this.walletId= wallet_id ;
+        this.walletId = wallet_id;
     }
 
     public String getPassword() {
