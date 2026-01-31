@@ -60,4 +60,15 @@ public class UserService {
         String message= "User does not exist anymore!" ;
         return message ;
     }
+
+    public boolean validateWalletId(String userId, String walletId )
+    {
+        User user= getUserById(userId ) ;
+        if((user.getWalletId() ).equals(walletId ) ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
