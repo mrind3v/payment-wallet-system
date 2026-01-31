@@ -13,17 +13,17 @@ public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id ;
 
     @NotNull
-    private BigDecimal balance;
+    private BigDecimal balance ;
 
     @NotNull
-    private String status;
+    private String status ;
 
     @NotNull
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt ;
 
     public Wallet() {
         this.createdAt = new Date();
