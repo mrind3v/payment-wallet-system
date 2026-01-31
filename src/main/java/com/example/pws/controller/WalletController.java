@@ -25,7 +25,7 @@ public class WalletController {
     }
 
     @GetMapping("/balance" )
-    public GetBalanceResponse getBalanceById(@PathVariable String id)
+    public GetBalanceResponse getBalanceById(@PathVariable String id )
     {
         GetBalanceResponse rs= new GetBalanceResponse() ;
         BigDecimal balance= walletService.getBalanceById(id ) ;

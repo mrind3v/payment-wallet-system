@@ -25,6 +25,9 @@ public class User {
     private String status;
 
     @NotNull
+    private String password ;
+
+    @NotNull
     @Column(name = "created_at")
     private Date createdAt;
 
@@ -81,5 +84,13 @@ public class User {
 
     public void setWalletId(String wallet_id) {
         this.walletId= wallet_id ;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
