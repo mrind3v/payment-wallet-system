@@ -14,6 +14,8 @@ public class CreateUserRequest {
     @NotNull
     private BigDecimal balance ;
 
+    @NotNull
+    private String password ;
 
     public String getName() {
         return name;
@@ -37,5 +39,13 @@ public class CreateUserRequest {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

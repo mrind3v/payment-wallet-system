@@ -23,6 +23,7 @@ public class UserService {
         User user= new User() ;
         user.setName(usr.getName() ) ;
         user.setEmail(usr.getEmail() ) ;
+        user.setPassword(usr.getPassword() ) ;
         Wallet wallet= walletService.createWallet(usr.getBalance() ) ;
         user.setWalletId(wallet.getId() ) ;
         user.setStatus("HERE" ) ;
