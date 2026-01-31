@@ -11,6 +11,4 @@ public class PwsApplication {
 		SpringApplication.run(PwsApplication.class, args);
 	}
 
-
-
 }
