@@ -1,14 +1,10 @@
 package com.example.pws.controller;
-
-import com.example.pws.dto.GetBalanceResponse;
 import com.example.pws.model.Wallet;
 import com.example.pws.service.WalletService;
-import org.springframework.boot.jackson.autoconfigure.JacksonProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 import java.math.BigDecimal;
 
