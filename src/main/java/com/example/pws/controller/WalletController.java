@@ -1,4 +1,5 @@
 package com.example.pws.controller;
+import com.example.pws.dto.GetBalanceResponse;
 import com.example.pws.model.Wallet;
 import com.example.pws.service.WalletService;
 import org.springframework.http.ResponseEntity;
