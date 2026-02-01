@@ -1,6 +1,6 @@
 This is how the application.properties file inside resources directory should look liks:
 ```shell
-spring.application.name=pws
+spring.application.name=DATABASE_NAME
 
 # Database Connection (Using MySQL Driver for MariaDB)
 # Note: We use 'jdbc:mysql' because we are using the MySQL driver
