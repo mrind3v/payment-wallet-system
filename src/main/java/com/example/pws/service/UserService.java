@@ -1,5 +1,6 @@
 package com.example.pws.service;
 
+import com.example.pws.exception.ResourceNotFoundException;
 import com.example.pws.dto.CreateUserRequest;
 import com.example.pws.dto.UpdateEmailRequest;
 import com.example.pws.model.User;
@@ -7,6 +8,9 @@ import com.example.pws.model.Wallet;
 import com.example.pws.repository.UserRepository;
 /* import com.example.pws.repository.WalletRepository ; */
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,28 +35,35 @@ public class UserService {
         return user ;
     }
 
-    public User getUserById(String id )
+    @Cacheable(value= "users", key= "#id" )
+    public User getUserById(String id ) throws ResourceNotFoundException
     {
-        User user= userRepository.findById(id ).orElse(null ) ;
+        User user= userRepository.findById(id ).orElse(null) ;
+        if (user==null) throw new ResourceNotFoundException("User not found");
         return user ;
     }
 
-    public User updateEmailById(String id, UpdateEmailRequest request )
+    @CachePut(value= "users", key= "#id" )
+    public User updateEmailById(String id, UpdateEmailRequest request ) throws ResourceNotFoundException
     {
         User user= getUserById(id ) ;
         if(user== null ) {
-            return null;
+            throw new ResourceNotFoundException("User not found");
         }
-        user.setEmail(request.getMessage() ) ;
+        user.setEmail(request.getEmail() ) ;
+        System.out.println("=====================================================================");
+        System.out.println(request.getEmail());
+        System.out.println("======================================================================");
         userRepository.save(user ) ;
         return user ;
     }
 
-    public String deleteUserById(String id )
+    @CacheEvict(value= "users", key= "#id" )
+    public String deleteUserById(String id ) throws ResourceNotFoundException
     {
         User user= getUserById(id ) ;
         if(user== null ) {
-            return null;
+            throw new ResourceNotFoundException("User not found");
         }
         String walletId= user.getWalletId() ;
         userRepository.delete(user );
@@ -61,14 +72,14 @@ public class UserService {
         return message ;
     }
 
-    public boolean validateWalletId(String userId, String walletId )
+    public boolean validateWalletId(String userId, String walletId ) throws ResourceNotFoundException
     {
-        User user= getUserById(userId ) ;
+        User user= getUserById(userId );
         if((user.getWalletId() ).equals(walletId ) ) {
             return true;
         }
         else {
-            return false;
+            throw new ResourceNotFoundException("Unauthorized Access To Wallet" ) ;
         }
     }
 }

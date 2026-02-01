@@ -1,20 +1,22 @@
 package com.example.pws.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
 public class CreateUserRequest {
 
-    @NotNull
+    @NotBlank(message = "Name cannot be empty")
     private String name ;
-    @NotNull
+    @Email(message = "Invalid Email")
+    @NotBlank(message = "Email cannot be blank")
     private String email ;
 
-    @NotNull
+    @NotNull(message = "Balance should be greater than 0")
+    @DecimalMin("0.0" )
     private BigDecimal balance ;
 
-    @NotNull
+    @NotBlank(message = "Password should not be blank")
     private String password ;
 
     public String getName() {

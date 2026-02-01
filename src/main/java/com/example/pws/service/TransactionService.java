@@ -1,11 +1,14 @@
 package com.example.pws.service;
 
+import com.example.pws.exception.InvalidAmountException;
+import com.example.pws.exception.UnauthorizedAccessException;
 import com.example.pws.dto.GetTransactionRequest;
 import com.example.pws.model.Transaction;
 import com.example.pws.model.Wallet;
 import com.example.pws.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -23,21 +26,23 @@ public class TransactionService {
     @Autowired
     private UserService userService ;
 
+    @Cacheable(value= "transactions", key= "#id" )
     public List<Transaction > getAllTransactionsById(String id )
     {
         List<Transaction > lis= traRep.findUserAById(id ).orElse(null ) ;
         return lis ;
     }
 
-    public boolean validateBalance(String userId, GetTransactionRequest request )
+    public boolean validateBalance(String userId, GetTransactionRequest request ) throws UnauthorizedAccessException, InvalidAmountException
     {
         boolean validateWallet= userService.validateWalletId(userId, request.getWalletId() ) ;
         if(validateWallet== false ) {
-            return false;
+            throw new UnauthorizedAccessException("Invalid access to wallet");
         }
         Wallet wallet= walletService.getWalletById(request.getWalletId() ) ;
-        if((wallet.getBalance() ).compareTo((request.getAmount() ) )== -1 ) {
-            return false ;
+        BigDecimal newBigDecimal = new BigDecimal("0.0");
+        if((wallet.getBalance() ).compareTo((request.getAmount() ) )== -1  || (request.getAmount().compareTo(newBigDecimal)==-1)) {
+            throw new InvalidAmountException("Invalid amount");
         }
         return true ;
     }
@@ -58,6 +63,8 @@ public class TransactionService {
         transaction_new.setType("SUCCESSFUL" ) ;
         traRep.save(transaction ) ;
         traRep.save(transaction_new ) ;
+        walletService.updateWalletById(request.getWalletId(), (request.getAmount() ) ) ;
+        walletService.updateWalletById((request.getReceiverId() ), ((num ).multiply((request.getAmount() ) ) ) ) ;
         return transaction ;
     }
 }

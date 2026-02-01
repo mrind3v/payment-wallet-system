@@ -1,17 +1,21 @@
 package com.example.pws.dto;
 
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class UpdateEmailRequest {
 
-    @NotNull
+    @Email(message = "Invalid Email")
+    @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    public String getMessage() {
+    public String getEmail() {
         return email;
     }
 
-    public void setMessage(String message) {
-        this.email = message ;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

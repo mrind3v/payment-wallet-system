@@ -1,6 +1,7 @@
 package com.example.pws.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ public class Wallet {
     private String id ;
 
     @NotNull
+    @DecimalMin("0.0")
     private BigDecimal balance ;
 
     @NotNull

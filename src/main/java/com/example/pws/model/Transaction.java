@@ -22,7 +22,6 @@ public class Transaction {
     private String userB ;
 
     @NotNull
-    @DecimalMin("0.0" )
     private BigDecimal amount;
 
     @NotNull
