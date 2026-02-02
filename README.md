@@ -1,4 +1,4 @@
-This is how the application.properties file inside resources directory should look liks:
+This is how the application.properties file inside resources directory should look like:
 ```shell
 spring.application.name=DATABASE_NAME
 
